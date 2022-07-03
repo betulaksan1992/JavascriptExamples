@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Example06_RGBOrnek</title>
+    <style>
+        #colorPalette {
+            height: 300px;
+            width: 400px;
+            text-align: center;
+            font-size: 40px;
+            font-family: Verdana;
+            border: 2px dotted black;
+            border-radius: 20px;
+            padding: 50px;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+</head>
+<body>
+    <h2>RGB Javascript Örneği</h2>
+    R <input class="colorRange" id="rangeRed" type="range" value="0" min="0" max="255"/>
+    <label id="lblRed">0</label>
+    G <input class="colorRange"  id="rangeGreen" type="range" value="0" min="0" max="255"/>
+    <label id="lblGreen">0</label>
+    B <input  class="colorRange" id="rangeBlue" type="range" value="0" min="0" max="255" />
+    <label id="lblBlue">0</label>
+    <div id="colorPalette"></div>
+    <script>
+        $(document).ready(function () {
+            $(".colorRange").change(function () {
+                var red = 0, green = 0, blue = 0;
+                red = $("#rangeRed").val();
+                green = $("#rangeGreen").val();
+                blue = $("#rangeBlue").val();
+
+                $("#lblRed").html(red);
+                $("#lblGreen").html(green);
+                $("#lblBlue").html(blue);
+                var color = "rgb(" + red + "," + green + "," + blue + ")";
+                var reverseColor =
+                    "rgb(" + (255 - red) + "," + (255 - green) + "," + (255 - blue) + ")";
+                var hexCode = "#" + ToHex(red) + ToHex(green) + ToHex(blue);
+                $("#colorPalette").css("background-color",color);
+                $("#colorPalette").css("color",reverseColor);
+                $("#colorPalette").css("height",300);
+                $("#colorPalette").css("width",400);
+                $("#colorPalette").css("font-family","Verdana");
+                $("#colorPalette").css("font-size",20);
+                $("#colorPalette").css("text-align","center");
+                $("#colorPalette").css("border-radius",20);
+                $("#colorPalette").css("border",2);
+                $("#colorPalette").css("border-color",reverseColor);
+                $("#colorPalette").css("padding",50);
+                $("#colorPalette").html("<i>"+color + " \t" + hexCode+"</i>");
+
+            });
+        }); //document.ready burada biter.
+
+        function ToHex(number) {
+            //gelen sayıyı hex'e çevirecek'
+            var hex = parseInt(number).toString(16);
+            if (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+        
+    </script>
+</body>
+</html>

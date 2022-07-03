@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        .BirinciBtn{
+            background-color:lightblue;
+            color:red;
+            height:75px;
+            width:150px;
+            font-size:20px;
+            font-weight:bold;
+        }
+        .IkinciBtn {
+            background-color: lightblue;
+            color: red;
+            height: 75px;
+            width: 150px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .ReverseBtn {
+            background-color: red;
+            color: lightblue;
+            height: 75px;
+            width: 150px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function btn1Clicked() {
+            //1. yöntem
+            document.getElementById("btn2").style =
+                "color:lightblue; background-color:black;";
+
+            document.getElementById("btn1").style =
+                "color:black; background-color:lightblue;";
+            //kısa yöntem
+            document.getElementById("btn1").style =
+                "class:\"BirinciBtn\"";
+        }
+        function btn2Clicked() {
+            //1. yöntem
+            document.getElementById("btn1").style =
+                "color:lightblue; background-color:black;";
+
+            document.getElementById("btn2").style =
+                "color:black; background-color:lightblue;";
+            //kısa yöntem
+            document.getElementById("btn2").style =
+                "class:\"IkinciBtn\"";
+        }
+
+        function button1Clicked(btn, digerBtn) {
+           
+            digerBtn.classList.remove("IkinciBtn");
+            digerBtn.classList.add("ReverseBtn");
+           
+            console.log(btn.classList);
+            if (btn.classList.value==='ReverseBtn') {
+                btn.classList.remove("ReverseBtn");
+                btn.classList.add("BirinciBtn");
+            }
+        }
+        function button2Clicked(btn, digerBtn) {
+            digerBtn.classList.remove("BirinciBtn");
+            digerBtn.classList.add("ReverseBtn");
+            
+            console.log(btn.classList);
+            if (btn.classList.value==='ReverseBtn') {
+                btn.classList.remove("ReverseBtn");
+                btn.classList.add("IkinciBtn");
+            }
+        }
+
+
+    </script>
+
+
+</head>
+<body>
+    <!--1. yöntem için-->
+    <h3>Birinci Yöntem</h3>
+    <!--<input type="button" id="btn1" class="BirinciBtn" value="Buton 1"
+           onclick="btn1Clicked()" />-->
+
+    <input type="button" id="btn1" class="BirinciBtn" value="Buton 1"
+           onclick="button1Clicked(this,document.getElementById('btn2'))" />
+
+    <!--<input type="button" id="btn2" class="IkinciBtn" value="Buton 2"
+           onclick="btn2Clicked()" />-->
+
+    <input type="button" id="btn2" class="IkinciBtn" value="Buton 2"
+         onclick="button2Clicked(this,document.getElementById('btn1'))" />
+
+</body>
+</html>

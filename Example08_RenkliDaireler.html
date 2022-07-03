@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Renkli Daireler</title>
+    <style>
+        .sekil {
+            margin: 5px;
+            float: left;
+            height: 200px;
+            width: 200px;
+            
+            transition:  1.4s ;
+        }
+            .sekil:hover {
+                transform: scale(0.2) rotate(1800deg) translate(42px, 18px);
+                
+            }
+    </style>
+</head>
+<body>
+    <h2>Butona tıklayarak renkli daireler oluşturabilirsiniz...</h2>
+    <input type="button" value="EKLE" onclick="DaireEkle()" />
+    <div id="dairelerDiv"></div>
+    <script>
+        var div = document.getElementById("dairelerDiv");
+        function DaireEkle() {
+            //yeni div oluşturacak
+            var yeniDiv = document.createElement("div");
+            yeniDiv.setAttribute("class", "sekil");
+            yeniDiv.style.backgroundColor = RastgeleRenkUret();
+            yeniDiv.setAttribute("onclick", "IcineEkle(this)");
+            div.appendChild(yeniDiv);
+        }
+
+        function RastgeleRenkUret() {
+            var degerler = "0123456789ABCDEF";
+            var renk = "#";
+            var rastgele = null;
+            var uretilenIndex = 0;
+            //#FFFFFF
+            for (var i = 0; i < 6; i++) {
+                rastgele = Math.random();
+                uretilenIndex = Math.floor(rastgele * 16);
+                console.log(uretilenIndex);
+                renk += degerler[uretilenIndex];
+            }
+            console.log(renk);
+            return renk;
+        }
+
+        function IcineEkle(item) {
+            var genislik = item.offsetWidth;
+            var yukseklik = item.offsetHeight;
+            var yeniDiv = document.createElement("div");
+            yeniDiv.setAttribute("style",
+                "margin:5px; float:left; height:" +
+                (Number(yukseklik) - 10) + "px; width: " + (Number(genislik) - 10) + "px; border-radius:" + (Number(yukseklik) - 2));
+            yeniDiv.setAttribute("onclick", IcineEkle(this));
+            yeniDiv.style.backgroundColor = RastgeleRenkUret();
+            item.setAttribute("onclick", null);
+            item.appendChild(yeniDiv);
+        }
+    </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Example06_RGBOrnek</title>
+    <style>
+        #colorPalette {
+            height: 300px;
+            width: 400px;
+            text-align: center;
+            font-size: 40px;
+            font-family: Verdana;
+            border: 2px dotted black;
+            border-radius: 20px;
+            padding: 50px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h2>RGB Javascript Örneği</h2>
+    R <input id="rangeRed" type="range" value="0" min="0" max="255"
+             onchange="Degistir()" />
+    <label id="lblRed">0</label>
+    G <input id="rangeGreen" type="range"  value="0" min="0" max="255"
+             onchange="Degistir()" />
+    <label id="lblGreen">0</label>
+    B <input id="rangeBlue" type="range" value="0" min="0" max="255"
+             onchange="Degistir()" />
+    <label id="lblBlue">0</label>
+    <div id="colorPalette" ></div>
+    <script>
+        function Degistir() {
+            var red = 0, green = 0, blue = 0;
+            red = document.getElementById("rangeRed").value;
+            green = document.getElementById("rangeGreen").value;
+            blue = document.getElementById("rangeBlue").value;
+
+            document.getElementById("lblRed").innerText = red;
+            document.getElementById("lblGreen").innerText = green;
+            document.getElementById("lblBlue").innerText = blue;
+
+            //rgb(red,green,blue)
+            var color = "rgb(" + red + "," + green + "," + blue + ")";
+            var reverseColor =
+                "rgb(" + (255 - red) + "," + (255 - green) + "," + (255 - blue) + ")";
+            var hexCode = "#" + ToHex(red) + ToHex(green) + ToHex(blue);
+
+            document.getElementById("colorPalette").style.backgroundColor = color;
+            document.getElementById("colorPalette").style.color = reverseColor;
+            document.getElementById("colorPalette").style.borderColor = reverseColor;
+            document.getElementById("colorPalette").innerText = color + "\t" + hexCode;
+        }
+        function ToHex(number) {
+            //gelen sayıyı hex'e çevirecek'
+            var hex = parseInt(number).toString(16);
+            if (hex.length < 2) {
+                hex = "0" + hex;
+            }
+            return hex;
+        }
+    </script>
+</body>
+</html>

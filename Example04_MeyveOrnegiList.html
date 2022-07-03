@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Example04_MeyveOrnegiList</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div style="margin-top:50px; margin-left:300px;width:50%;
+text-align:center;">
+        <h2>Meyve Listesi</h2> <br />
+        <hr /><br />
+        <input type="text" id="txtMeyve" placeholder="Meyve Giriniz..." /> <br /> <br />
+        <input type="button" value="EKLE" onclick="MeyveEkle()"
+               class="meyveEkleBtn" />
+        <input type="button" value="TEMİZLE" onclick="Temizle()"
+               class="temizleBtn" />
+        <br /> <br />
+        <input type="text" id="txtMeyveAra" placeholder="Ara..." />
+        <br /> <br />
+        <div id="meyvediv"></div>
+    </div>
+
+    <script>
+        var meyveler = [];
+        function Temizle() {
+            if (meyveler.length==0) {
+                alert("Sayfa zaten temiz!!");
+            }
+            meyveler = [];
+            document.getElementById("txtMeyve").value = "";
+            document.getElementById("txtMeyveAra").value = "";
+            document.getElementById("meyvediv").innerHTML = "";
+        }
+        function MeyveEkle() {
+            var meyveAdi =
+                document.getElementById("txtMeyve").value.trim();
+            if (meyveAdi==null || meyveAdi.length==0) {
+                alert("Meyve adı boş geçilemez!");
+                return;
+            }
+            var yeniMeyve = {
+                id: 0,
+                isim: meyveAdi,
+                adet:0
+            };
+            if (meyveler.length==0) {
+                yeniMeyve.id = 1;
+                yeniMeyve.adet = 1;
+                meyveler.push(yeniMeyve);
+            }
+            else {
+                var meyvedenVarMi = false;
+                //meyveden listede olup olmadığına bakmamız gerekli
+                for (var i = 0; i < meyveler.length; i++) {
+                    if (meyveler[i].isim.toLowerCase()==meyveAdi.toLowerCase() ) {
+                        meyvedenVarMi = true;
+                        meyveler[i].adet++;
+                        break;
+                    }
+                }
+                if (meyvedenVarMi==false) {
+                    yeniMeyve.adet = 1;
+                    yeniMeyve.id = meyveler.length + 1;
+                    meyveler.push(yeniMeyve);
+                }
+
+            }
+
+            document.getElementById("txtMeyve").value = "";
+            MeyveDoldur();
+        }
+
+        function MeyveDoldur() {
+            document.getElementById("meyvediv").innerHTML = "";
+            var toplam = 0;
+            var ol = document.createElement("ol");
+            ol.setAttribute("id", "meyveList");
+            var span = document.createElement("span");
+
+            for (var i = 0; i < meyveler.length; i++) {
+                if (meyveler[i].adet<1) {
+                    continue;
+                }
+                toplam += meyveler[i].adet;
+                var li = document.createElement("li");
+                li.innerHTML = "<b>" + meyveler[i].isim +
+                    "</b> - " + meyveler[i].adet;
+
+                var artiBtn = document.createElement("input");
+                artiBtn.setAttribute("type", "button");
+                artiBtn.setAttribute("value", "+");
+                artiBtn.setAttribute("id", meyveler[i].id);
+                artiBtn.addEventListener("click", AdetArttir);
+
+                var azaltBtn = document.createElement("input");
+                azaltBtn.setAttribute("type", "button");
+                azaltBtn.setAttribute("value", "-");
+                azaltBtn.setAttribute("id", meyveler[i].id);
+                azaltBtn.addEventListener("click", AdetAzalt);
+
+
+                var cikarBtn = document.createElement("input");
+                cikarBtn.setAttribute("type", "button");
+                cikarBtn.setAttribute("value", "ÇIKART");
+                cikarBtn.setAttribute("id", meyveler[i].id);
+                cikarBtn.addEventListener("click", MeyveyiSil);
+
+                li.appendChild(artiBtn);
+                li.appendChild(azaltBtn);
+                li.appendChild(cikarBtn);
+                ol.appendChild(li);
+            } // for döngüsü burada biter.
+            document.getElementById("meyvediv").appendChild(ol);
+            span.innerText = "Toplam = " + toplam;
+            document.getElementById("meyvediv").appendChild(span);
+
+        }
+        function AdetArttir() {
+            for (var i = 0; i < meyveler.length; i++) {
+                if (meyveler[i].id==this.id) {
+                    meyveler[i].adet++;
+                    break;
+                }
+            }//for bitti.
+            MeyveDoldur();
+        }
+        function AdetAzalt() {
+            for (var i = 0; i < meyveler.length; i++) {
+                if (meyveler[i].id == this.id) {
+                    meyveler[i].adet--;
+                    if (meyveler[i].adet==0) {
+                        meyveler.splice(i, 1);
+                        for (var i = 0; i < meyveler.length; i++) {
+                            meyveler[i].id = i + 1;
+                        }// for burada bitti.
+                    } //if bitti
+                    break;
+                } //if bitti
+            }// for biter. 
+            MeyveDoldur();
+        }
+        function MeyveyiSil() {
+            for (var i = 0; i < meyveler.length; i++) {
+                if (meyveler[i].id == this.id) {
+                    meyveler.splice(i, 1);
+                    break;
+                }
+            } // for burada bitti.
+            // Eğer id'lerin sıralı gitmesini istiyorsanız 
+            // dizideki herkesin id'sini yeniden atadık.
+            //Eğer id'ler değişsin istemezseniz aşağıdaki for döngüsünü kullanmayınız...
+            for (var i = 0; i < meyveler.length; i++) {
+                //id'yi +1 yaptık. Çünkü bir tanesi gitti.
+                meyveler[i].id = i + 1;
+
+            }// for burada bitti.
+            MeyveDoldur();
+        }
+
+        $(document).ready(function () {
+            $("#txtMeyveAra").on("keyup", function () {
+                //var deger = document.getElementById("txtMeyveAra").value;
+                //var deger = $("#txtMeyveAra").val();
+                var deger = $(this).val().toLowerCase();
+                $("#meyveList li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(deger) > -1)
+                });
+
+            });
+        });
+    </script>
+
+
+</body>
+</html>

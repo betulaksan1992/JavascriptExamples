@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    Birim Fiyat:
+    <br /> <input type="text" id="birimfiyat" />  <br />
+    Miktar/adet:
+    <br /><input type="text" id="miktar" /> <br />
+    Toplam Tutar:
+    <br /><input type="text" id="toplamtutar" readonly /> <br />
+    İndirim:
+    <br /> <input type="text" id="indirim" /><br />
+    İndiirm Tutarı:
+    <br /><input type="text" id="indirimtutari" /><br />
+    İndirimliToplam Tutar:
+
+    <br />  <input type="text" id="indirimlitoplamtutar" readonly /><br />
+    Kdv:
+
+    <br /> <input type="text" id="kdv" /><br />
+    Kdv Tutarı:
+    <br /> <input type="text" id="kdvtutari" /><br />
+    KdvLi toplam tutar:
+
+    <br />  <input type="text" id="kdvlitoplamtutar" readonly /><br />
+    <br /> <input type="button" value="Hesapla" onclick="Hesapla()" />
+    <script>
+        function Hesapla() {
+            var toplamtutar = (document.getElementById("birimfiyat").value * document.getElementById("miktar").value);
+            document.getElementById("toplamtutar").value = toplamtutar;
+            var indirimtutari = 0;
+            if (document.getElementById("indirim").value > 0) {
+                indirimtutari = (document.getElementById("indirim").value * toplamtutar / 100);
+
+            }
+            document.getElementById("indirimtutari").value = indirimtutari;
+            var indirimlitoplamtutar = toplamtutar - indirimtutari;
+            document.getElementById("indirimlitoplamtutar").value = indirimlitoplamtutar;
+            var kdvtutari = 0;
+            if (document.getElementById("kdv").value > 0) {
+                kdvtutari = (document.getElementById("kdv").value * indirimlitoplamtutar / 100);
+
+            }
+
+            document.getElementById("kdvtutari").value = kdvtutari;
+            var kdvlitoplamtutar = kdvtutari + indirimlitoplamtutar;
+            document.getElementById("kdvlitoplamtutar").value = kdvlitoplamtutar;
+        }
+
+    </script>
+
+</body>
+</html>

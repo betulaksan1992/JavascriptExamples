@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h2>inner Text ve inner HTML Farkı</h2> <br />
+    <input type="text" id="txtMesaj" />
+    <input type="button" value="Gönder" onclick="MesajGonder()" />
+    <br /> <br />
+    <input type="text" id="txtMesaj2" onkeyup="Yazdir(this.value)"/>
+    <br />
+    <label id="lblMesaj"></label>
+    <script>
+        function MesajGonder() {
+            console.log("butona tıkladı");
+            document.getElementById("lblMesaj").innerText = document.getElementById("txtMesaj").value;
+
+            document.getElementById("txtMesaj").value = "";
+            document.getElementById("txtMesaj2").value = "";
+        }
+
+        function Yazdir(mesaj) {
+            document.getElementById("lblMesaj").style =
+                "color:red; background-color:pink;";
+            document.getElementById("lblMesaj").
+                innerHTML = "<i>" + document.getElementById("txtMesaj2").value + "</i>";
+        }
+    </script>
+</body>
+</html>

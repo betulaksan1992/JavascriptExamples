@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32510.428
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ED2747A4-59BA-4AA7-AE81-2600E1EABD77}"
+	ProjectSection(SolutionItems) = preProject
+		Example01.html = Example01.html
+		Example02.html = Example02.html
+		Example03.html = Example03.html
+		Example04_MeyveOrnegiList.html = Example04_MeyveOrnegiList.html
+		Example05_MeyveOrnegiTable.html = Example05_MeyveOrnegiTable.html
+		Example06_RGBOrnek.html = Example06_RGBOrnek.html
+		Example07_RGBOrnek.html = Example07_RGBOrnek.html
+		Example08_RenkliDaireler.html = Example08_RenkliDaireler.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8123F6A3-774C-4536-AB79-4FCAA01F4E13}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+
+<html lang="tr" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>İlk Örneğimiz Nesne Seçimi</title>
+
+</head>
+<body onload="sayfaYuklendi()" style="margin-left:100px;margin-top:50px;">
+    <h2>Nesne Seçimi Örneğimiz</h2> <br/>
+    <h4>Aşağıdaki textbox'a yazdığınız mesajınızı gönder butonuna tıkladığınızda aktarılacaktır.
+    </h4> <br/>
+    <input type="text" id="txtMesaj" />
+    <input type="button" value="Gönder" onclick="MesajGonder()"/>
+    <br/>
+    <h4>Aşağıdaki textboxa mesajınızı yazar yazmaz aktarılacaktır!</h4>
+    <br/>
+    <input type="text" id="txtMesaj2" onkeyup="Yazdir(this)"/>
+    <br /><br/>
+    <span id="spantext">Sonuç:</span>
+    <label id="lblMesaj"></label>
+    <script>
+        function sayfaYuklendi() {
+            // alert("yüklendi");
+            console.log("yüklendi");
+            document.getElementById("spantext").style.visibility = "hidden";
+        }
+
+        function MesajGonder() {
+            console.log("butona tıklandı");
+            var mesaj = document.getElementById("txtMesaj").value;
+            var txt = document.getElementById("txtMesaj"); // texti değişkene aldı
+            document.getElementById("txtMesaj2").value="";
+            if (mesaj.length>1) {
+                document.getElementById("spantext").style.visibility = "visible";
+                document.getElementById("lblMesaj").innerText = mesaj;
+                //document.getElementById("lblMesaj").innerText = txt.value;
+
+                //   document.getElementById("txtMesaj").value = "";
+                txt.value = "";
+            }
+            else {
+                alert("Gönderilecek bir mesaj yazmadınız!!");
+            }
+
+            
+        }
+        function Yazdir(txt) {
+            document.getElementById("spantext").style.visibility = "visible";
+            document.getElementById("lblMesaj").innerText =
+                document.getElementById("txtMesaj2").value;
+        }
+    </script>
+</body>
+</html>

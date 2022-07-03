@@ -1,0 +1,10 @@
+﻿#colorPalette {
+    height: 300px;
+    width: 400px;
+    text-align: center;
+    font-size: 40px;
+    font-family: Verdana;
+    border: 2px dotted black;
+    border-radius: 20px;
+    padding: 50px;
+}
